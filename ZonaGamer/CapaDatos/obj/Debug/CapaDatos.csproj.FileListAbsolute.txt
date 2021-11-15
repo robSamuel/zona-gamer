@@ -1,0 +1,12 @@
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.pdb
+C:\Users\50588\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\PC\Desktop\ZonaGamer\ZonaGamer\CapaDatos\obj\Debug\CapaDatos.pdb
