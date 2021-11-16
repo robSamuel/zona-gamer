@@ -10,15 +10,19 @@ namespace CapaDatos
 {
     class Conexion
     {
-        try
-            {
-                connect = new SqlConnection("Server=DESKTOP-4CTFC2J\\SQLSERVER2017;Database=Clientes;UID=" + user + ";PWD=" + pass);
-                connect.Open();
-            }
-            catch (Exception)
-            {
-              
-                
-            }
+        public static SqlConnection OpenCN()
+        {
+            SqlConnection connect = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
+            connect.Open();
+            return connect;
+        }
+
+        public static SqlConnection CloseCN()
+        {
+            SqlConnection connect = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
+            connect.Close();
+            return connect;
+        }
+
     }
 }
