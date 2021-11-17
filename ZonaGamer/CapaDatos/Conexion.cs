@@ -12,16 +12,16 @@ namespace CapaDatos
     {
         public static SqlConnection OpenCN()
         {
-            SqlConnection cn = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
-            cn.Open();
-            return cn;
+            SqlConnection Cn = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
+            Cn.Open();
+            return Cn;
         }
 
         public static SqlConnection CloseCN()
         {
-            SqlConnection cn = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
-            cn.Close();
-            return cn;
+            SqlConnection Cn = new SqlConnection("Server=localhost;Database=ZonaGamer;Integrated security=true");
+            Cn.Close();
+            return Cn;
         }
 
     }
