@@ -91,7 +91,7 @@ namespace CapaDatos
             try
             {
                 //Codigo
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
 
                 //Establecer el comando
@@ -176,7 +176,7 @@ namespace CapaDatos
             try
             {
                 //Codigo
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
 
                 //Establecer el comando
@@ -260,7 +260,7 @@ namespace CapaDatos
             try
             {
                 //Codigo
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
 
                 //Establecer el comando
@@ -300,7 +300,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmpstrar_proveedor";
@@ -324,7 +324,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_proveedor_razon_social";
@@ -356,7 +356,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_proveedor_num_documento";

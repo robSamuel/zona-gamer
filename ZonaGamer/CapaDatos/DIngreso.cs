@@ -105,8 +105,8 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                
-                SqlCon.ConnectionString = Conexion.Cn;
+
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
              
                 SqlTransaction SqlTra = SqlCon.BeginTransaction();
@@ -225,7 +225,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_ingreso";
@@ -250,7 +250,7 @@ namespace CapaDatos
             try
             {
 
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
 
                 SqlCommand SqlCmd = new SqlCommand();
@@ -285,7 +285,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_ingreso_fecha";
@@ -323,7 +323,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_detalle_ingreso";
