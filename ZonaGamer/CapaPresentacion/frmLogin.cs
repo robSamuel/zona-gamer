@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using CapaNegocio;
 using System.Threading;
 using System.Security.Cryptography;
+using System.Data.SqlClient;
 
 namespace CapaPresentacion
 {
-    public partial class frmLogin : Form
+    public partial class frmLogin : Form 
     {
 
         public frmLogin()
@@ -44,7 +45,7 @@ namespace CapaPresentacion
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
 
-            
+            //Conexion cn = new Conexion();
  
                 for (int i=0; i<=100; i++)
             {

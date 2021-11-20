@@ -143,7 +143,7 @@ namespace CapaDatos
             try
             {
                 //Código
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
                 //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
@@ -258,7 +258,7 @@ namespace CapaDatos
             try
             {
                 //Código
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
                 //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
@@ -371,7 +371,7 @@ namespace CapaDatos
             try
             {
                 //Código
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCon.Open();
                 //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
@@ -407,7 +407,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_empleado";
@@ -433,7 +433,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_empleado_apellidos";
@@ -465,7 +465,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_empleado_cedula";
@@ -496,7 +496,7 @@ namespace CapaDatos
             SqlConnection SqlCon = new SqlConnection();
             try
             {
-                SqlCon.ConnectionString = Conexion.Cn;
+                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "splogin";
