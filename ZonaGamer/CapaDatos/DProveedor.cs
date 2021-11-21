@@ -19,8 +19,6 @@ namespace CapaDatos
         private string _Email;
         private string _TextoBuscar;
 
-        //Propiedades
-
         public int idProveedor
         {
             get { return _IdProveedor; }
@@ -64,11 +62,11 @@ namespace CapaDatos
             set { _TextoBuscar = value; }
         }
 
-        //Propiedades
         public DProveedor()
         {
 
         }
+
         public DProveedor(int idproveedor, string razon_social,string tipo_documento, string num_documento, string direccion, string telefono, string email, string url, string textobuscar)
         {
             this.idProveedor = idproveedor;
@@ -81,20 +79,13 @@ namespace CapaDatos
             this.TextoBuscar = textobuscar;
         }
 
-        //Metodos
-        //Metodo insertar
-
         public string Insertar(DProveedor Proveedor)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "spinsertar_proveedor";
@@ -120,7 +111,6 @@ namespace CapaDatos
                 ParTipo_Documento.Value = Proveedor.Tipo_documento;
                 sqlCmd.Parameters.Add(ParTipo_Documento);
 
-
                 SqlParameter ParNum_Documento = new SqlParameter();
                 ParNum_Documento.ParameterName = "@num_documento";
                 ParNum_Documento.SqlDbType = SqlDbType.NVarChar;
@@ -149,13 +139,7 @@ namespace CapaDatos
                 ParEmail.Value = Proveedor.email;
                 sqlCmd.Parameters.Add(ParEmail);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Ingreso el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro ingresado" : "No se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -165,6 +149,7 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
@@ -172,14 +157,10 @@ namespace CapaDatos
         public string Editar(DProveedor Proveedor)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speditar_proveedor";
@@ -204,7 +185,6 @@ namespace CapaDatos
                 ParTipoDocumento.Value = Proveedor.Tipo_documento;
                 sqlCmd.Parameters.Add(ParTipoDocumento);
 
-
                 SqlParameter ParNum_Documento = new SqlParameter();
                 ParNum_Documento.ParameterName = "@num_documento";
                 ParNum_Documento.SqlDbType = SqlDbType.NVarChar;
@@ -233,12 +213,7 @@ namespace CapaDatos
                 ParEmail.Value = Proveedor.email;
                 sqlCmd.Parameters.Add(ParEmail);
 
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Actualizo el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro actualizado" : "No se Actualizo el Registro";
             }
             catch (Exception ex)
             {
@@ -248,22 +223,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Eliminar
 
         public string Eliminar(DProveedor Proveedor)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speliminar_proveedor";
@@ -275,11 +245,7 @@ namespace CapaDatos
                 parIdProveedor.Value = Proveedor.idProveedor;
                 sqlCmd.Parameters.Add(parIdProveedor);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Elimino el Registro";
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro eliminado" : "No se Elimino el Registro";
             }
             catch (Exception ex)
             {
@@ -289,18 +255,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Mostrar
 
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Proveedor");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmpstrar_proveedor";
@@ -308,20 +273,20 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-        //Metodo Buscar razon social
         public DataTable BuscarRazon_Social(DProveedor Proveedor)
         {
             DataTable DtResultado = new DataTable("Proveedor");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
                 SqlCon.ConnectionString = Conexion.OpenCN().ToString();
@@ -339,24 +304,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-
-        //Metodo Buscar numero de documento
         public DataTable BuscarNum_documento(DProveedor Proveedor)
         {
             DataTable DtResultado = new DataTable("Proveedor");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_proveedor_num_documento";
@@ -371,12 +334,12 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
     }

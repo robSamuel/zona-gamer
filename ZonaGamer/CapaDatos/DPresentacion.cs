@@ -44,18 +44,13 @@ namespace CapaDatos
             this.TextoBuscar = textobuscar;
         }
 
-        //Insertar
         public string Insertar(DPresentacion Presentacion)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "spinsertar_Presentacion";
@@ -74,7 +69,6 @@ namespace CapaDatos
                 ParNombre.Value = Presentacion.Nombre;
                 sqlCmd.Parameters.Add(ParNombre);
 
-
                 SqlParameter ParDescripcion = new SqlParameter();
                 ParDescripcion.ParameterName = "@descripcion";
                 ParDescripcion.SqlDbType = SqlDbType.NVarChar;
@@ -82,12 +76,7 @@ namespace CapaDatos
                 ParDescripcion.Value = Presentacion.Descripcion;
                 sqlCmd.Parameters.Add(ParDescripcion);
 
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Ingreso el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro ingresado" : "No se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -97,21 +86,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Metodo Editar
         public string Editar(DPresentacion Presentacion)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speditar_Presentacion";
@@ -130,7 +115,6 @@ namespace CapaDatos
                 ParNombre.Value = Presentacion.Nombre;
                 sqlCmd.Parameters.Add(ParNombre);
 
-
                 SqlParameter ParDescripcion = new SqlParameter();
                 ParDescripcion.ParameterName = "@descripcion";
                 ParDescripcion.SqlDbType = SqlDbType.NVarChar;
@@ -138,12 +122,7 @@ namespace CapaDatos
                 ParDescripcion.Value = Presentacion.Descripcion;
                 sqlCmd.Parameters.Add(ParDescripcion);
 
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Actualizo el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro actualizado" : "No se Actualizo el Registro";
             }
             catch (Exception ex)
             {
@@ -153,22 +132,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Eliminar
 
         public string Eliminar(DPresentacion Presentacion)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speliminar_presentacion";
@@ -180,11 +154,7 @@ namespace CapaDatos
                 ParIdPresentacion.Value = Presentacion.IdPresentacion;
                 sqlCmd.Parameters.Add(ParIdPresentacion);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Elimino el Registro";
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro eliminado" : "No se Elimino el Registro";
             }
             catch (Exception ex)
             {
@@ -194,18 +164,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Mostrar
 
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Presentacion");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_presentacion";
@@ -213,23 +182,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-        //Metodo BuscarNombre
         public DataTable BuscarNombre(DPresentacion Presentacion)
         {
             DataTable DtResultado = new DataTable("Presentacion");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_presentacion_nombre";
@@ -243,12 +211,12 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
     }

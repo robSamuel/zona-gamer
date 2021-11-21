@@ -10,7 +10,6 @@ namespace CapaDatos
 {
     public class DDetalle_Ingreso
     {
-        //Variables
         private int _idDetalle_ingreso;
         private int _idIngreso;
         private int _idProducto;
@@ -20,8 +19,6 @@ namespace CapaDatos
         private int _Stock_Actual;
         private DateTime _Fecha_Produccion;
 
-
-        //Propiedades
         public int idDetalle_ingreso
         {
             get { return _idDetalle_ingreso; }
@@ -71,11 +68,11 @@ namespace CapaDatos
             set { _Fecha_Produccion = value; }
         }
 
-        //Constructores
         public DDetalle_Ingreso()
         {
 
         }
+
         public DDetalle_Ingreso(int iddetalle_ingreso, int idingreso, int idproducto, decimal precio_compra, decimal precio_venta, int stock_inicial, int stock_actual, DateTime fecha_produccion)
         {
             this.idDetalle_ingreso = iddetalle_ingreso;
@@ -86,15 +83,12 @@ namespace CapaDatos
             this.Stock_Inicial = stock_inicial;
             this.Stock_Actual = stock_actual;
             this.Fecha_Produccion = fecha_produccion;
-            
-
         }
 
-        //Método Insertar
-        public string Insertar(DDetalle_Ingreso Detalle_Ingreso, 
-            ref SqlConnection SqlCon, ref SqlTransaction SqlTra)
+        public string Insertar(DDetalle_Ingreso Detalle_Ingreso, ref SqlConnection SqlCon, ref SqlTransaction SqlTra)
         {
             string rpta = "";
+
             try
             {
 
@@ -150,18 +144,13 @@ namespace CapaDatos
                 ParStock_Inicial.Value = Detalle_Ingreso.Stock_Inicial;
                 SqlCmd.Parameters.Add(ParStock_Inicial);
 
-                
-
                 SqlParameter ParFecha_Produccion = new SqlParameter();
                 ParFecha_Produccion.ParameterName = "@Fecha_Produccion";
                 ParFecha_Produccion.SqlDbType = SqlDbType.DateTime;
                 ParFecha_Produccion.Value = Detalle_Ingreso.Fecha_Produccion;
                 SqlCmd.Parameters.Add(ParFecha_Produccion);
 
-
-                //Ejecutamos nuestro comando
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Ingreso el Registro";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Registro ingresado" : "NO se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -169,8 +158,6 @@ namespace CapaDatos
             }
 
             return rpta;
-
         }
-
     }
 }
