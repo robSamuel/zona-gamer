@@ -48,8 +48,6 @@ namespace CapaDatos
             get { return _TextoBuscar; }
             set { _TextoBuscar = value; }
         }
-
-        //Constructores
         public DProducto()
         {
 
@@ -68,19 +66,13 @@ namespace CapaDatos
 
         }
 
-        //Metodos 
-        //Insertar
         public string Insertar(DProducto Producto)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "spinsertar_producto";
@@ -106,7 +98,6 @@ namespace CapaDatos
                 ParNombre.Value = Producto.Nombre;
                 sqlCmd.Parameters.Add(ParNombre);
 
-
                 SqlParameter ParDescripcion = new SqlParameter();
                 ParDescripcion.ParameterName = "@Descripcion";
                 ParDescripcion.SqlDbType = SqlDbType.NVarChar;
@@ -126,12 +117,7 @@ namespace CapaDatos
                 ParIdPresentacion.Value = Producto.IdPresentacion;
                 sqlCmd.Parameters.Add(ParIdPresentacion);
 
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Ingreso el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Ingreso registrado" : "No se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -141,21 +127,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Metodo Editar
         public string Editar(DProducto Producto)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speditar_Producto";
@@ -181,7 +163,6 @@ namespace CapaDatos
                 ParNombre.Value = Producto.Nombre;
                 sqlCmd.Parameters.Add(ParNombre);
 
-
                 SqlParameter ParDescripcion = new SqlParameter();
                 ParDescripcion.ParameterName = "@Descripcion";
                 ParDescripcion.SqlDbType = SqlDbType.NVarChar;
@@ -201,12 +182,7 @@ namespace CapaDatos
                 ParIdPresentacion.Value = Producto.IdPresentacion;
                 sqlCmd.Parameters.Add(ParIdPresentacion);
 
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Actualizo el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro actualizado" : "No se Actualizo el Registro";
             }
             catch (Exception ex)
             {
@@ -216,22 +192,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Eliminar
 
         public string Eliminar(DProducto Producto)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speliminar_producto";
@@ -243,11 +214,7 @@ namespace CapaDatos
                 ParIdproducto.Value = Producto.IdProducto;
                 sqlCmd.Parameters.Add(ParIdproducto);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Elimino el Registro";
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro eliminado" : "No se Elimino el Registro";
             }
             catch (Exception ex)
             {
@@ -257,18 +224,16 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Mostrar
 
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("producto");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_producto";
@@ -276,27 +241,27 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-        //Metodo BuscarNombre
         public DataTable BuscarNombre(DProducto Producto)
         {
             DataTable DtResultado = new DataTable("Producto");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_producto_nombre";
                 SqlCmd.CommandType = CommandType.StoredProcedure;
+
                 SqlParameter ParTextoBuscar = new SqlParameter();
                 ParTextoBuscar.ParameterName = "@textobuscar";
                 ParTextoBuscar.SqlDbType = SqlDbType.NVarChar;
@@ -306,24 +271,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
-        }
 
-        //Metodo 
+            return DtResultado;
+        } 
 
         public DataTable Stock_Producto()
         {
             DataTable DtResultado = new DataTable("Producto");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spstock_producto";
@@ -331,12 +294,12 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
     }

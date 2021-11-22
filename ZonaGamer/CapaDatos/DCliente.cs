@@ -10,7 +10,6 @@ namespace CapaDatos
 {
     public class DCliente
     {
-        //Variables
         private int _Idcliente;
         private string _Nombre;
         private string _Apellido;
@@ -22,8 +21,6 @@ namespace CapaDatos
         private string _Telefono;
         private string _Email;
         private string _Textobuscar;
-
-        //propiedades metodos setter and getter
 
         public int idCliente 
         { get { return _Idcliente; }
@@ -73,7 +70,6 @@ namespace CapaDatos
                 set { _Textobuscar = value; }
         }
 
-        //Contructores
         public DCliente()
         {
 
@@ -97,21 +93,13 @@ namespace CapaDatos
 
         }
 
-        //Metodos 
-
-        //Metodo insertar
-
         public string Insertar(DCliente Cliente)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "spinsertar_cliente";
@@ -188,13 +176,7 @@ namespace CapaDatos
                 ParEmail.Value = Cliente.Email;
                 sqlCmd.Parameters.Add(ParEmail);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Ingreso el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro ingresado" : "No se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -204,21 +186,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Metodo Editar
         public string Editar(DCliente Cliente)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speditar_cliente";
@@ -295,13 +273,7 @@ namespace CapaDatos
                 ParEmail.Value = Cliente.Email;
                 sqlCmd.Parameters.Add(ParEmail);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Actualizo el Registro";
-
-
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro actualizado" : "No se Actualizo el Registro";
             }
             catch (Exception ex)
             {
@@ -311,22 +283,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Eliminar
 
         public string Eliminar(DCliente Cliente)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Codigo
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
-                //Establecer el comando
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = SqlCon;
                 sqlCmd.CommandText = "speliminar_cliente";
@@ -338,11 +305,7 @@ namespace CapaDatos
                 ParIdCliente.Value = Cliente.idCliente;
                 sqlCmd.Parameters.Add(ParIdCliente);
 
-
-                //Ejecutamos nuestro comando
-
-                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "OK" : "No se Elimino el Registro";
-
+                rpta = sqlCmd.ExecuteNonQuery() == 1 ? "Registro eliminado" : "No se Elimino el Registro";
             }
             catch (Exception ex)
             {
@@ -352,18 +315,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
-
-        //Metodo Mostrar
 
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Cliente");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_cliente";
@@ -371,23 +333,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-        //Metodo BuscarNombre
         public DataTable BuscarApellido(DCliente Cliente)
         {
             DataTable DtResultado = new DataTable("Cliente");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_cliente_apellido";
@@ -402,24 +363,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
 
-
-        //Metodo BuscarNum_documento
         public DataTable BuscarNum_documento(DCliente Cliente)
         {
             DataTable DtResultado = new DataTable("Cliente");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_cliente_num_documento";
@@ -434,15 +393,13 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
+
             return DtResultado;
         }
-
-
     }
 }

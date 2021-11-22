@@ -20,7 +20,6 @@ namespace CapaDatos
         private decimal _Igv;
         private string _Estado;
 
-        //Propiedades
         public int idVentas
         {
             get { return _Idventas; }
@@ -75,11 +74,11 @@ namespace CapaDatos
             set { _Estado = value; }
         }
 
-        //Constructores
         public DVenta()
         {
 
         }
+
         public DVenta(int idventas, int idcliente, int idempleado, DateTime fecha, string tipo_comprobante, string serie, string correlativo, decimal igv, string estado)
         {
             this.idVentas = idventas;
@@ -93,17 +92,13 @@ namespace CapaDatos
             this.Estado = estado;
         }
 
-        //Disminuir Stock
         public string DisminuirStock(int idDetalle_ingreso, int Cantidad)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spdisminuir_stock";
@@ -120,10 +115,8 @@ namespace CapaDatos
                 ParCantidad.SqlDbType = SqlDbType.Int;
                 ParCantidad.Value = Cantidad;
                 SqlCmd.Parameters.Add(ParCantidad);
-                //Ejecutamos nuestro comando
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "Se actualizó el Stock";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Ok" : "Se actualizó el Stock";
             }
             catch (Exception ex)
             {
@@ -133,29 +126,24 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Métodos
         public string Insertar(DVenta Venta, List<DDetalle_Venta> Detalles)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer la transacción
                 SqlTransaction SqlTra = SqlCon.BeginTransaction();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
+
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.Transaction = SqlTra;
                 SqlCmd.CommandText = "spinsertar_venta";
                 SqlCmd.CommandType = CommandType.StoredProcedure;
 
-                //Parámtros
                 SqlParameter ParIdventa = new SqlParameter();
                 ParIdventa.ParameterName = "@idVentas";
                 ParIdventa.SqlDbType = SqlDbType.Int;
@@ -209,24 +197,21 @@ namespace CapaDatos
                 ParIgv.Value = Venta.Igv;
                 SqlCmd.Parameters.Add(ParIgv);
 
-
-                //Ejecutamos nuestro comando
+                // TODO: Improve the validations to use SqlCmd.ExecuteNonQuery() == 1 instead of the "Ok"
                 rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Ingreso el Registro";
+
                 if (rpta.Equals("OK"))
                 {
-                    //Obtenemos el codigo del ingreso que se genero por la base de datos
-
                     this.idVentas = Convert.ToInt32(SqlCmd.Parameters["@idVentas"].Value);
+
                     foreach (DDetalle_Venta det in Detalles)
                     {
-                        //Establecemos el codigo del ingreso que se autogenero
                         det.idVentas = this.idVentas;
                         //Llamamos al metodo insertar de la clase DetalleIngreso
                         //y le pasamos la conexion y la transaccion que debe de usar
                         rpta = det.Insertar(det, ref SqlCon, ref SqlTra);
                         if (!rpta.Equals("OK"))
                         {
-                            //Si ocurre un error al insertar un detalle de ingreso salimos del for
                             break;
                         }
                         else
@@ -235,23 +220,15 @@ namespace CapaDatos
 
                             rpta = DisminuirStock(det.idDetalle_Ingreso, det.Cantidad);
                             if (!rpta.Equals("OK"))
-                            {
                                 break;
-                            }
                         }
                     }
                 }
-                if (rpta.Equals("OK"))
-                {
-                    //Se inserto todo los detalles y confirmamos la transaccion
-                    SqlTra.Commit();
-                }
-                else
-                {
-                    //Algun detalle no se inserto y negamos la transaccion
-                    SqlTra.Rollback();
-                }
 
+                if (rpta.Equals("OK"))
+                    SqlTra.Commit();
+                else
+                    SqlTra.Rollback();
             }
             catch (Exception ex)
             {
@@ -262,21 +239,15 @@ namespace CapaDatos
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
             return rpta;
-
         }
-
-            
 
         public string Eliminar(DVenta Ventas)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "speliminar_venta";
@@ -287,10 +258,8 @@ namespace CapaDatos
                 ParIdventa.SqlDbType = SqlDbType.Int;
                 ParIdventa.Value = Ventas.idVentas;
                 SqlCmd.Parameters.Add(ParIdventa);
-                //Ejecutamos nuestro comando
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "OK";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "Venta eliminada";
             }
             catch (Exception ex)
             {
@@ -300,17 +269,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Método Mostrar
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Ventas");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_venta";
@@ -318,24 +287,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
-        //Método BuscarFechas
         public DataTable BuscarFechas(String TextoBuscar, String TextoBuscar2)
         {
             DataTable DtResultado = new DataTable("Ventas");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_venta_fecha";
@@ -357,23 +324,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public DataTable MostrarDetalle(String TextoBuscar)
         {
             DataTable DtResultado = new DataTable("Detalle_venta");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_detalle_venta";
@@ -388,23 +354,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public DataTable MostrarProducto_Venta_Nombre(String TextoBuscar)
         {
             DataTable DtResultado = new DataTable("Producto");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscararticulo_venta_nombre";
@@ -419,23 +384,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public DataTable MostrarArticulo_Venta_Codigo(String TextoBuscar)
         {
             DataTable DtResultado = new DataTable("Producto");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscararticulo_venta_codigo";
@@ -450,14 +414,13 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
     }
 }
