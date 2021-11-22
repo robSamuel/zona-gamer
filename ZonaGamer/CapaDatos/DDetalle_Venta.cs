@@ -34,7 +34,6 @@ namespace CapaDatos
             set { _Iddetalle_Ingreso = value; }
         }
 
-
         public int Cantidad
         {
             get { return _Cantidad; }
@@ -47,14 +46,12 @@ namespace CapaDatos
             set { _Precio_Venta = value; }
         }
 
-
         public decimal Descuento
         {
             get { return _Descuento; }
             set { _Descuento = value; }
         }
 
-        //Constructores
         public DDetalle_Venta()
         {
 
@@ -67,16 +64,14 @@ namespace CapaDatos
             this.Cantidad = cantidad;
             this.Precio_Venta = precio_venta;
             this.Descuento = descuento;
-
         }
 
-        //Método Insertar
         public string Insertar(DDetalle_Venta Detalle_Venta, ref SqlConnection SqlCon, ref SqlTransaction SqlTra)
         {
             string rpta = "";
+
             try
             {
-
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.Transaction = SqlTra;
@@ -119,10 +114,7 @@ namespace CapaDatos
                 ParDescuento.Value = Detalle_Venta.Descuento;
                 SqlCmd.Parameters.Add(ParDescuento);
 
-
-                //Ejecutamos nuestro comando
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Ingreso el Registro";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Ok" : "NO se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -130,7 +122,6 @@ namespace CapaDatos
             }
 
             return rpta;
-
         }
     }
 }

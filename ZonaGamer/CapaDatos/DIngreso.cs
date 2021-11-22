@@ -10,7 +10,6 @@ namespace CapaDatos
 {
     public class DIngreso
     {
-        //Variables
         private int _Idingreso;
         private int _Idproveedor;
         private int _Idempleado;
@@ -21,8 +20,6 @@ namespace CapaDatos
         private decimal _Igv;
         private string _Estado;
 
-
-        //Propiedades
         public int idIngreso
         {
             get { return _Idingreso; }
@@ -77,11 +74,11 @@ namespace CapaDatos
             set { _Estado = value; }
         }
 
-        //Constructores
         public DIngreso()
         {
 
         }
+
         public DIngreso(int idingreso, int idempleado, int idproveedor, 
             DateTime fecha, string tipo_comprobante, string serie, 
             string correlativo, decimal igv, string estado)
@@ -97,27 +94,20 @@ namespace CapaDatos
             this.Estado = estado;
         }
 
-
-        //Métodos
         public string Insertar(DIngreso Ingreso, List <DDetalle_Ingreso> Detalle)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
             try
             {
-
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-             
                 SqlTransaction SqlTra = SqlCon.BeginTransaction();
-    
                 SqlCommand SqlCmd = new SqlCommand();
+
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.Transaction = SqlTra;
                 SqlCmd.CommandText = "spinsertar_ingreso";
                 SqlCmd.CommandType = CommandType.StoredProcedure;
 
-                //Parámetros
                 SqlParameter ParIdingreso = new SqlParameter();
                 ParIdingreso.ParameterName = "@idIngreso";
                 ParIdingreso.SqlDbType = SqlDbType.Int;
@@ -135,7 +125,6 @@ namespace CapaDatos
                 ParIdproveedor.SqlDbType = SqlDbType.Int;
                 ParIdproveedor.Value = Ingreso.idProveedor;
                 SqlCmd.Parameters.Add(ParIdproveedor);
-
 
                 SqlParameter ParFecha = new SqlParameter();
                 ParFecha.ParameterName = "@Fecha";
@@ -179,11 +168,13 @@ namespace CapaDatos
                 ParEstado.Value = Ingreso.Estado;
                 SqlCmd.Parameters.Add(ParEstado);
 
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Conexion.OpenCN()" : "NO se Ingreso el Registro";
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Ingreso el Registro";
+                // TODO: Change these validations with rpta in order to use SqlCmd.ExecuteNonQuery()
                 if (rpta.Equals("OK"))
                 {
-                          this.idIngreso = Convert.ToInt32(SqlCmd.Parameters["@idIngreso"].Value);
+                    this.idIngreso = Convert.ToInt32(SqlCmd.Parameters["@idIngreso"].Value);
+
                     foreach (DDetalle_Ingreso det in Detalle)
                     {
                         det.idIngreso = this.idIngreso;
@@ -194,17 +185,11 @@ namespace CapaDatos
                         }
                     }
                 }
-                if (rpta.Equals("OK"))
-                {
-                    //Se inserto todo los detalles y confirmamos la transaccion
-                    SqlTra.Commit();
-                }
-                else
-                {
-                    //Algun detalle no se inserto y negamos la transaccion
-                    SqlTra.Rollback();
-                }
 
+                if (rpta.Equals("OK"))
+                    SqlTra.Commit();
+                else
+                    SqlTra.Rollback();
             }
             catch (Exception ex)
             {
@@ -214,18 +199,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
-            return rpta;
 
+            return rpta;
         }
 
-        //Método Mostrar
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Ingreso");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_ingreso";
@@ -233,26 +217,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public string Anular(DIngreso Ingreso)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spanular_ingreso";
@@ -264,8 +244,7 @@ namespace CapaDatos
                 ParIdingreso.Value = Ingreso.idIngreso;
                 SqlCmd.Parameters.Add(ParIdingreso);
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se anulo el Ingreso";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Registro anulado" : "NO se anulo el Ingreso";
             }
             catch (Exception ex)
             {
@@ -275,17 +254,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Método BuscarFechas
         public DataTable BuscarFechas(String TextoBuscar, String TextoBuscar2)
         {
             DataTable DtResultado = new DataTable("Ingreso");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_ingreso_fecha";
@@ -307,23 +286,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public DataTable MostrarDetalle(String TextoBuscar)
         {
             DataTable DtResultado = new DataTable("Detalle_Ingreso");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_detalle_ingreso";
@@ -338,14 +316,13 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
     }
 }

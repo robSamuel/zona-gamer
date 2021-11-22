@@ -10,9 +10,6 @@ namespace CapaDatos
 {
     public class DEmpleado
     {
-
-     
-        //Variables
         private int _Idempleado;
         private string _Nombre;
         private string _Apellido;
@@ -27,8 +24,6 @@ namespace CapaDatos
         private string _Password;
         private string _TextoBuscar;
 
-        //Propiedades
-        //Métodos Setter an Getter Propiedades
         public int idempleado
         {
             get { return _Idempleado; }
@@ -106,8 +101,6 @@ namespace CapaDatos
             get { return _TextoBuscar; }
             set { _TextoBuscar = value; }
         }
-
-        //Constructores
         public DEmpleado()
         {
 
@@ -134,18 +127,13 @@ namespace CapaDatos
             this.TextoBuscar = textobuscar;
         }
 
-        //Método Insertar
-
         public string Insertar(DEmpleado Empleado)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spinsertar_empleado";
@@ -234,9 +222,7 @@ namespace CapaDatos
                 ParPassword.Value = Empleado.password;
                 SqlCmd.Parameters.Add(ParPassword);
 
-                //Ejecutamos nuestro comando
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Ingreso el Registro";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Registro insertado" : "NO se Ingreso el Registro";
             }
             catch (Exception ex)
             {
@@ -246,21 +232,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
-            return rpta;
 
+            return rpta;
         }
 
-        //Método Editar
         public string Editar(DEmpleado Empleado)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "speditar_empleado";
@@ -348,9 +330,8 @@ namespace CapaDatos
                 ParPassword.Size = 50;
                 ParPassword.Value = Empleado.password;
                 SqlCmd.Parameters.Add(ParPassword);
-                //Ejecutamos nuestro comando
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Actualizo el Registro";
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Registro actualizado" : "NO se Actualizo el Registro";
             }
             catch (Exception ex)
             {
@@ -360,20 +341,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Método Eliminar
         public string Eliminar(DEmpleado Empleado)
         {
             string rpta = "";
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                //Código
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
-                SqlCon.Open();
-                //Establecer el Comando
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "speliminar_empleado";
@@ -384,10 +362,8 @@ namespace CapaDatos
                 ParIdempleado.SqlDbType = SqlDbType.Int;
                 ParIdempleado.Value = Empleado.idempleado;
                 SqlCmd.Parameters.Add(ParIdempleado);
-                //Ejecutamos nuestro comando
 
-                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "OK" : "NO se Elimino el Registro";
-
+                rpta = SqlCmd.ExecuteNonQuery() == 1 ? "Registro eliminado" : "NO se Elimino el Registro";
             }
             catch (Exception ex)
             {
@@ -397,17 +373,17 @@ namespace CapaDatos
             {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
+
             return rpta;
         }
 
-        //Método Mostrar
         public DataTable Mostrar()
         {
             DataTable DtResultado = new DataTable("Empleado");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spmostrar_empleado";
@@ -415,25 +391,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
-
-        //Método BuscarApellidos
         public DataTable BuscarApellidos(DEmpleado Empleado)
         {
             DataTable DtResultado = new DataTable("Empleado");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_empleado_apellidos";
@@ -448,24 +421,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
-        //Método BuscarCedula
         public DataTable BuscarCedula(DEmpleado Empleado)
         {
             DataTable DtResultado = new DataTable("Empleado");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "spbuscar_empleado_cedula";
@@ -480,23 +451,22 @@ namespace CapaDatos
 
                 SqlDataAdapter SqlDat = new SqlDataAdapter(SqlCmd);
                 SqlDat.Fill(DtResultado);
-
             }
             catch (Exception ex)
             {
                 DtResultado = null;
             }
-            return DtResultado;
 
+            return DtResultado;
         }
 
         public DataTable Login(DEmpleado Empleado)
         {
             DataTable DtResultado = new DataTable("Empleado");
-            SqlConnection SqlCon = new SqlConnection();
+            SqlConnection SqlCon = Conexion.OpenCN();
+
             try
             {
-                SqlCon.ConnectionString = Conexion.OpenCN().ToString();
                 SqlCommand SqlCmd = new SqlCommand();
                 SqlCmd.Connection = SqlCon;
                 SqlCmd.CommandText = "splogin";
@@ -524,9 +494,8 @@ namespace CapaDatos
             {
                 DtResultado = null;
             }
+
             return DtResultado;
-
         }
-
     }
 }
