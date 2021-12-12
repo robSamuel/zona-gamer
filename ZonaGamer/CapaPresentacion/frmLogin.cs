@@ -45,14 +45,6 @@ namespace CapaPresentacion
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
 
-            //Conexion cn = new Conexion();
- 
-            //    for (int i=0; i<=100; i++)
-            //{
-            //    this.progressBar1.Value = i;
-            //    Thread.Sleep(100);
-            //}
-
             if (intentos != 2)
             {
 
@@ -64,7 +56,7 @@ namespace CapaPresentacion
 
                     MessageBox.Show("Error de autentificacion, verifique usuario y/o Contraseña por favor", "Sistema Ventas", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     intentos++;
-                    
+                     
                 }
                 else
                 {
