@@ -47,11 +47,11 @@ namespace CapaPresentacion
 
             //Conexion cn = new Conexion();
  
-                for (int i=0; i<=100; i++)
-            {
-                this.progressBar1.Value = i;
-                Thread.Sleep(100);
-            }
+            //    for (int i=0; i<=100; i++)
+            //{
+            //    this.progressBar1.Value = i;
+            //    Thread.Sleep(100);
+            //}
 
             if (intentos != 2)
             {

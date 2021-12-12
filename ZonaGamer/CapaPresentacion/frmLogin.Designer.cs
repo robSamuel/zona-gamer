@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.LblHoras = new System.Windows.Forms.Label();
             this.BtnSalir = new System.Windows.Forms.Button();
             this.BtnIngresar = new System.Windows.Forms.Button();
@@ -57,17 +54,15 @@
             this.label1.BackColor = System.Drawing.Color.BlueViolet;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(205, 9);
+            this.label1.Location = new System.Drawing.Point(308, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(230, 29);
+            this.label1.Size = new System.Drawing.Size(336, 40);
             this.label1.TabIndex = 2;
             this.label1.Text = "Sistema de Ventas";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.LblHoras);
             this.groupBox1.Controls.Add(this.BtnSalir);
             this.groupBox1.Controls.Add(this.BtnIngresar);
@@ -75,48 +70,24 @@
             this.groupBox1.Controls.Add(this.txtUsuario);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(210, 55);
+            this.groupBox1.Location = new System.Drawing.Point(315, 85);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(477, 186);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(716, 286);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Acceso al Sistema";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(312, 158);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "100%";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(88, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(21, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "0%";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.BackColor = System.Drawing.Color.White;
-            this.progressBar1.Location = new System.Drawing.Point(91, 132);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(254, 23);
-            this.progressBar1.TabIndex = 11;
-            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
-            // 
             // LblHoras
             // 
             this.LblHoras.AutoSize = true;
             this.LblHoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblHoras.Location = new System.Drawing.Point(106, 16);
+            this.LblHoras.Location = new System.Drawing.Point(159, 25);
+            this.LblHoras.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LblHoras.Name = "LblHoras";
-            this.LblHoras.Size = new System.Drawing.Size(51, 16);
+            this.LblHoras.Size = new System.Drawing.Size(70, 25);
             this.LblHoras.TabIndex = 10;
             this.LblHoras.Text = "label4";
             // 
@@ -124,9 +95,10 @@
             // 
             this.BtnSalir.BackColor = System.Drawing.Color.BlueViolet;
             this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSalir.Location = new System.Drawing.Point(226, 98);
+            this.BtnSalir.Location = new System.Drawing.Point(339, 151);
+            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnSalir.Name = "BtnSalir";
-            this.BtnSalir.Size = new System.Drawing.Size(119, 28);
+            this.BtnSalir.Size = new System.Drawing.Size(178, 43);
             this.BtnSalir.TabIndex = 9;
             this.BtnSalir.Text = "Salir";
             this.BtnSalir.UseVisualStyleBackColor = false;
@@ -136,9 +108,10 @@
             // 
             this.BtnIngresar.BackColor = System.Drawing.Color.BlueViolet;
             this.BtnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnIngresar.Location = new System.Drawing.Point(91, 98);
+            this.BtnIngresar.Location = new System.Drawing.Point(136, 151);
+            this.BtnIngresar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnIngresar.Name = "BtnIngresar";
-            this.BtnIngresar.Size = new System.Drawing.Size(119, 28);
+            this.BtnIngresar.Size = new System.Drawing.Size(178, 43);
             this.BtnIngresar.TabIndex = 8;
             this.BtnIngresar.Text = "Ingresar";
             this.BtnIngresar.UseVisualStyleBackColor = false;
@@ -146,34 +119,38 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(91, 72);
+            this.txtPassword.Location = new System.Drawing.Point(136, 111);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(254, 20);
+            this.txtPassword.Size = new System.Drawing.Size(379, 26);
             this.txtPassword.TabIndex = 7;
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(91, 35);
+            this.txtUsuario.Location = new System.Drawing.Point(136, 54);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(254, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(379, 26);
             this.txtUsuario.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 70);
+            this.label3.Location = new System.Drawing.Point(8, 108);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.Size = new System.Drawing.Size(78, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Password";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 42);
+            this.label2.Location = new System.Drawing.Point(8, 65);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(68, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Usuario:";
             // 
@@ -182,9 +159,10 @@
             this.pictureBox3.ErrorImage = null;
             this.pictureBox3.Image = global::CapaPresentacion.Properties.Resources.WhatsApp_Image_2020_01_24_at_13_02_32;
             this.pictureBox3.InitialImage = null;
-            this.pictureBox3.Location = new System.Drawing.Point(12, 55);
+            this.pictureBox3.Location = new System.Drawing.Point(18, 85);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(192, 168);
+            this.pictureBox3.Size = new System.Drawing.Size(288, 258);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 4;
             this.pictureBox3.TabStop = false;
@@ -192,18 +170,20 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.BlueViolet;
-            this.pictureBox2.Location = new System.Drawing.Point(-1, 247);
+            this.pictureBox2.Location = new System.Drawing.Point(-2, 380);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(697, 29);
+            this.pictureBox2.Size = new System.Drawing.Size(1046, 45);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.BlueViolet;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(697, 49);
+            this.pictureBox1.Size = new System.Drawing.Size(1046, 75);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -215,16 +195,17 @@
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(695, 273);
+            this.ClientSize = new System.Drawing.Size(1042, 420);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
@@ -254,8 +235,5 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label LblHoras;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
