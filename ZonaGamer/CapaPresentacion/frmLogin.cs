@@ -84,8 +84,9 @@ namespace CapaPresentacion
                 MessageBox.Show("Ha Alcanzado el nivel maximo de intento");
                 MessageBox.Show("El sistema de cerrara, Gracias");
                     Application.Exit();
-                        }    
-            
+                        }
+            txtUsuario.Clear();
+            txtPassword.Clear();
         }
 
        
